@@ -4,15 +4,15 @@
 # PointImporter.py
 # 2013 April 8
 
-'''PointConverter.py and PointImporter.py are programs I created for the purpose of bringing
-point cloud data and particle simulations from SideFx Houdini into
-Autodesk Maya.
+'''PointConverter.py and PointImporter.py are programs I created for
+the purpose of bringing point cloud data and particle simulations from
+SideFx Houdini into Autodesk Maya.
 
 ===========================================
 Copyright © 2013 Craig Barnett
 ===========================================
 
-This program is to be distributed only by the owner, it was created
+This program is to be distributed only by the owner. It was created
 in the hope that it will be useful to artists, but WITHOUT ANY WARRANTY.
 
 ===========================================
@@ -38,18 +38,18 @@ Read First:
  but will hopefully work with more soon.
 *If you are using Houdini 12 or newer you will need to 
  add .classic to the extension (.pc.classic or .bgeo.classic). 
- This is because Houdini now uses binary files instead of 
- ascii, .classic forces it back into ascii mode.
+ Houdini now uses binary files instead of ascii, .classic forces
+ it back into ascii mode.
 *As of now it only transfers point location and id attributes, if 
  no id exists it will create ids in order of location.
-*For the second tool to work you must have Autdesk Maya installed 
- versions 2012 or 2013, other versions are untested.
+*For the second tool to work you must have Autodesk Maya installed, 
+  either versions 2012 or 2013. Other versions are untested.
 
 Three Easy Steps:
 -----------------
-1. Export your point cloud from Houdini into a file/files
+1. Export your point cloud from Houdini into a file/files.
 2. Run the Point Converter tool and select your point cloud files   
-   from step 1, giving it a name, project directory, and range.
+   from step 1. Give it a name, project directory, and range.
 3. Run the Point Importer tool, select project directory, name 
    from previous step, and range.
 
@@ -57,44 +57,43 @@ Important Notes:
 ----------------
 *This tool will create empty cache files for frames not in your  
  sequence.
-*For example if you import frames 30-50 into Maya, 1-29 will    
+*For example, if you import frames 30-50 into Maya, 1-29 will    
  automatically be empty cache files.
-*A series of folders will be created in the directory you choose, 
+*A series of folders will be created in the directory you choose 
  if they don't already exist.
 *Those folders are called scenes, particles, data and backup.
-*Cached Sims must go in the particles folder of your project 
+*Cached simulations must go in the particles folder of your project 
  directory.
-*The scenes folder is your saves, data folder and backup folder 
- are for backups of the cache and scene.
-*This way if you modify the cache in the particles folder, you 
- can replace it with the original in the data folder.
+*The scenes folder is for your save files. The data folder and backup
+ folder are for backups of the cache and scene.
+*If you modify the cache in the particles folder, you can replace the
+ cache with the original in the data folder.
 *It will set the current scenes project folder to whichever 
  folder you choose as the directory.
 *Changing the name of the scene will normally break the cache, so 
- in order to keep backups rename the old files instead of the new 
+ in order to keep backups, rename the old files instead of the new 
  ones.
 *In order to change the Maya version or Autodesk directory 
  location set during installation, navigate to the install 
  folder, typically "C:\Program Files (x86)\PointImporter" and 
  open the file config.ini with any text editor, like notepad or 
- wordpad and change the version then save it, depending on your 
- setup you may need adminisitrator right to change this file 
+ wordpad. Then change the version and save it. Depending on your 
+ setup you may need administrator rights to change this file 
  after installing.
 *If the simulation doesn't appear when you open the file try 
- going to File in the title menu then click on Set Project... and 
- navigate to your Project Directory, afterwards make sure you 
- reset the timeline before hitting play again.
+ going to File in the title menu and click on "Set Project...". In 
+ the following dialog navigate to your Project Directory created
+ earlier. Afterwards make sure you reset the timeline before hitting
+ play again.
 
 Using Multiple Caches:
 ----------------------
 *When running the Point Converter Tool simply make sure you 
- change the name to something different.
-*If you do not change the name it will overwrite the previous 
- cache.
+ change the name to something different. If you do not change
+ the name it will overwrite the previous cache.
 *Do NOT name your cache the same as a particle simulation you 
- already have in your scene.
-*Doing so will erase said particle simulation and overwrite it 
- with the cache.
+ already have in your scene. Doing so will erase said particle
+ simulation and overwrite it with the cache.
 
 '''
 
