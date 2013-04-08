@@ -1,0 +1,169 @@
+Houdini to Maya Point Converter
+
+PointConverter.py and PointImporter.py are programs I created for the purpose of bringing
+point cloud data and particle simulations from SideFx Houdini into
+Autodesk Maya.
+
+===========================================
+Copyright © 2013 Craig Barnett
+===========================================
+
+This program is to be distributed only by the owner, it was created
+in the hope that it will be useful to artists, but WITHOUT ANY WARRANTY.
+
+===========================================
+Craig Barnett,
+302 W 40th St Apt A, Savannah, Ga 31401
+mailto: craigbme@hotmail.com
+http://www.bhvfx.com
+===========================================
+
+This script was developed to conveniently and quickly bring point cloud
+data or simulations from Houdini into Maya. The reasons I did this were
+to allow for better integration with your scene without a lot of post
+work and without the problem of matching lighting. You gain the benefits
+of being able to use the vast collection of Maya compatible renderers
+with your simulation along with easily having multiple simulations in one
+compact and fast scene.
+
+Read First:
+------------
+*These tools can be used to bring point cloud data from SideFx 
+ Houdini into Autodesk Maya.
+*Currently this only works with Houdini's .bgeo or .pc filetype    
+ but will hopefully work with more soon.
+*If you are using Houdini 12 or newer you will need to 
+ add .classic to the extension (.pc.classic or .bgeo.classic). 
+ This is because Houdini now uses binary files instead of 
+ ascii, .classic forces it back into ascii mode.
+*As of now it only transfers point location and id attributes, if 
+ no id exists it will create ids in order of location.
+*For the second tool to work you must have Autdesk Maya installed 
+ versions 2012 or 2013, other versions are untested.
+
+Three Easy Steps:
+-----------------
+1. Export your point cloud from Houdini into a file/files
+2. Run the Point Converter tool and select your point cloud files   
+   from step 1, giving it a name, project directory, and range.
+3. Run the Point Importer tool, select project directory, name 
+   from previous step, and range.
+
+Important Notes:
+----------------
+*This tool will create empty cache files for frames not in your  
+ sequence.
+*For example if you import frames 30-50 into Maya, 1-29 will    
+ automatically be empty cache files.
+*A series of folders will be created in the directory you choose, 
+ if they don't already exist.
+*Those folders are called scenes, particles, data and backup.
+*Cached Sims must go in the particles folder of your project 
+ directory.
+*The scenes folder is your saves, data folder and backup folder 
+ are for backups of the cache and scene.
+*This way if you modify the cache in the particles folder, you 
+ can replace it with the original in the data folder.
+*It will set the current scenes project folder to whichever 
+ folder you choose as the directory.
+*Changing the name of the scene will normally break the cache, so 
+ in order to keep backups rename the old files instead of the new 
+ ones.
+*In order to change the Maya version or Autodesk directory 
+ location set during installation, navigate to the install 
+ folder, typically "C:\Program Files (x86)\PointImporter" and 
+ open the file config.ini with any text editor, like notepad or 
+ wordpad and change the version then save it, depending on your 
+ setup you may need adminisitrator right to change this file 
+ after installing.
+*If the simulation doesn't appear when you open the file try 
+ going to File in the title menu then click on Set Project... and 
+ navigate to your Project Directory, afterwards make sure you 
+ reset the timeline before hitting play again.
+
+Using Multiple Caches:
+----------------------
+*When running the Point Converter Tool simply make sure you 
+ change the name to something different.
+*If you do not change the name it will overwrite the previous 
+ cache.
+*Do NOT name your cache the same as a particle simulation you 
+ already have in your scene.
+*Doing so will erase said particle simulation and overwrite it 
+ with the cache.
+
+Tutorial:
+---------
+1. Export your point cloud from Houdini as either a .pc or .bgeo   
+   (pc.classic or bgeo.classic if using Houdini 12 or newer) or 
+   use the example files located in the install directory in 
+   examplefiles.zip
+2. Install both programs to the directory of your choice. For the 
+   Point Importer Tool be sure to specify the Autodesk directory 
+   and then the Maya version.
+   Example:   ( C:\Program Files\Autodesk   and    Maya2013  )
+3. Run the Point Converter Tool and enter the following 
+   information:
+   1: Start Frame, that is the first frame you want the cache to    
+      start on, typically 1
+   2: End Frame, the frame the cache will end on
+   3: Name of Point Cloud, The name of the cache that will be 
+      used.  
+      in Maya and in the Point Importer Tool.
+   4: Select .pc files, Select the files you exported from  
+      Houdini
+   5: Select Project Folder, either an existing project folder 
+      containing a scenes folder along with a Maya scene or just 
+      another folder of your choosing.
+4. Click the Create PDC button and wait for it to finish, the 
+   computer may become unresponsive while this is in process 
+   depending on your system. A black window should print out the 
+   process of your files, it will print "All threads done" when 
+   it's complete.
+5. Open the Point Converter tool and enter the following 
+   information:
+   1: Do you have a previous scene?, Check yes if you would like 
+      to bring the cache into an existing Maya Scene, check no if 
+      you would like to bring the cache into an empty scene.
+   2: Select Existing Scene:, You only need to fill this in if  
+      you answered yes to the prvious question. If you answered 
+      yes click browse and open the Maya scene file, only .ma 
+      and .mb are supported but others may work.
+   3: Select Project Directory, Select the same project folder 
+      from the previous program. If you would like to create or   
+      use your own custom Project Directory just make sure it has 
+      folders named scenes, particles, and data and that and .pdc 
+      files you have are in the data folder. Normally you would 
+      use the same directory as you defined in the previous 
+      program.
+   4: New Scene Name:, This will be the name of the new file 
+      saved in the Scenes folder of your Project Directory 
+      containing your cached particles. Caution: Using an 
+      Existing name will overwrite it.
+   5: Cache Name:, This must be exactly what you typed in for the  
+      previous program. If your using custom particles already 
+      cached and in the data folder this should be the name of 
+      those files with the word shape. 
+      For example: "myCacheShape.250.pdc" would simply be 
+      "myCache"
+   6: End Frame, This should be the last frame of the cache. If 
+      you only want to import part of your simulation you can use 
+      less. Custom start frames for importing isn't allowed due 
+      to bugs with Maya all this will be handled automatically 
+      depending on what you selected in the previous program.
+6. Click the Create Button, This may take some time depending on   
+   the size of your cache files and speed of your hard drive. 
+   You will know it's done when your save file that you named in 
+   the previous step, appears in the Scenes folder of your 
+   project direcory. Once done you are free to delete the data 
+   folder in your project directory to free up space or keep it 
+   as a backup in case you corrupt or change your simulation. If 
+   you do, simply copy the files from the data folder over to the 
+   particles folder overwriting existing files.
+7. Open your scenes file in Maya and press play to enjoy your 
+   simulation. If the simulation does not appear it's most often 
+   due to the scenes project settings. To fix this in Maya simply 
+   click on File in the title menu then click on Set Project... 
+   In the window that appears select the project directory from 
+   before. Afterwards make sure you reset the timeline to reload 
+   the cache before you hit play again.
